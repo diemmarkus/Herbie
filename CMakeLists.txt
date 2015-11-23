@@ -104,7 +104,7 @@ qt5_use_modules(${BINARY_NAME} Widgets Gui Concurrent)
 
 SET(CMAKE_SHARED_LINKER_FLAGS_REALLYRELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /SUBSYSTEM:WINDOWS /LARGEADDRESSAWARE") # /subsystem:windows does not work due to a bug in cmake (see http://public.kitware.com/Bug/view.php?id=12566)
 
-set(QTLIBLIST Qt5Core Qt5Gui Qt5Network Qt5Widgets Qt5PrintSupport Qt5Concurrent Qt5Sensors Qt5MultimediaWidgets Qt5Multimedia Qt5OpenGL Qt5Positioning Qt5WebChannel Qt5Sql)
+set(QTLIBLIST Qt5Core Qt5Gui Qt5Widgets)
 	
 foreach(qtlib ${QTLIBLIST})
 	get_filename_component(QT_DLL_PATH_tmp ${QT_QMAKE_EXECUTABLE} PATH)
