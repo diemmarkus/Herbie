@@ -1,0 +1,6 @@
+<RCC>
+
+    <qresource prefix="/Herbie">
+        <file>img/trayIcon.png</file>
+    </qresource>
+</RCC>

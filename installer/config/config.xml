@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Herbie | CPU Diagnostics</Name>
+    <Version>1.0.0</Version>
+    <Title>Herbie</Title>
+    <Publisher>Markus Diem</Publisher>
+    <StartMenuDir>Herbie</StartMenuDir>
+    <TargetDir>@ApplicationsDir@/Herbie</TargetDir>
+	<InstallerWindowIcon>logo.png</InstallerWindowIcon>
+	<InstallerApplicationIcon>logo.ico</InstallerApplicationIcon>
+	<ControlScript>controller.js</ControlScript>
+</Installer>

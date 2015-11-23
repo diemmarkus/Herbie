@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>Herbie</DisplayName>
+    <Description>Install Herbie.</Description>
+    <Version>1.0.0-1</Version>
+    <ReleaseDate>2015-11-20</ReleaseDate>
+    <Licenses>
+        <License name="GNU General Public License" file="license.txt" />
+    </Licenses>
+    <Default>script</Default>
+    <Script>installscript.qs</Script>
+    <UserInterfaces>
+        <UserInterface>openapp.ui</UserInterface>
+    </UserInterfaces>
+	
+</Package>
