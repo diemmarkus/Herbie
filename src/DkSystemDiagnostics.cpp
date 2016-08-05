@@ -337,53 +337,58 @@ int SystemDiagnostics::getMaxProcessIdx() {
 	return maxIdx;
 }
 
-
-#include <iostream>
-#include <comdef.h>
-#include <Wbemidl.h>
-#pragma comment(lib, "wbemuuid.lib")
+//#include <iostream>
+//#include <comdef.h>
+//#include <Wbemidl.h>
+//#pragma comment(lib, "wbemuuid.lib")
 
 double SystemDiagnostics::getCoreTemperature() {
 
-	int pTemperature = -1;
-
-	CoInitialize(NULL); // needs comdef.h
-	CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_DEFAULT, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE, NULL);
+	return -1;
 	
-	IWbemLocator *pLocator = NULL; // needs Wbemidl.h & Wbemuuid.lib
-	//CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER, IID_IWbemLocator, (LPVOID*)&pLocator);
-	CoCreateInstance(CLSID_WbemLocator, NULL, CLSCTX_INPROC_SERVER, IID_IWbemLocator, (LPVOID*)&pLocator);
+	//int pTemperature = -1;
 
-	IWbemServices *pServices = NULL;
-	pLocator->ConnectServer(L"root\\WMI", NULL, NULL, NULL, 0, NULL, NULL, &pServices);
-	//pLocator->Release();
-	
-	IEnumWbemClassObject *pEnum;
-	pServices->ExecQuery(bstr_t("WQL"), bstr_t("SELECT * FROM MSAcpi_ThermalZoneTemperature"), WBEM_FLAG_RETURN_IMMEDIATELY | WBEM_FLAG_FORWARD_ONLY, NULL, &pEnum);
-	//pServices->Release();
-	
-	IWbemClassObject *pObject;
-	ULONG returned;
-	pEnum->Next(WBEM_INFINITE, 1, &pObject, &returned);
-	pEnum->Release();
-	
-	BSTR temp = SysAllocString(L"CurrentTemperature");
-	VARIANT v;
-	VariantInit(&v);
-	pObject->Get(temp, 0, &v, NULL, NULL);
-	pObject->Release();
-	SysFreeString(temp);
-	
-	pTemperature = V_I4(&v);
-	VariantClear(&v);
-	
-	CoUninitialize();
+	//CoInitialize(NULL); // needs comdef.h
+	//CoInitializeSecurity(NULL, -1, NULL, NULL, RPC_C_AUTHN_LEVEL_DEFAULT, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE, NULL);
+	//
+	//IWbemLocator *pLocator = NULL; // needs Wbemidl.h & Wbemuuid.lib
+	////CoCreateInstance(CLSID_WbemAdministrativeLocator, NULL, CLSCTX_INPROC_SERVER, IID_IWbemLocator, (LPVOID*)&pLocator);
+	//CoCreateInstance(CLSID_WbemLocator, NULL, CLSCTX_INPROC_SERVER, IID_IWbemLocator, (LPVOID*)&pLocator);
 
-	qDebug() << "temperature: " << pTemperature;
+	//IWbemServices *pServices = NULL;
+	//pLocator->ConnectServer(L"root\\WMI", NULL, NULL, NULL, 0, NULL, NULL, &pServices);
+	////pLocator->Release();
+	//
+	//IEnumWbemClassObject *pEnum;
+	//pServices->ExecQuery(bstr_t("WQL"), bstr_t("SELECT * FROM MSAcpi_ThermalZoneTemperature"), WBEM_FLAG_RETURN_IMMEDIATELY | WBEM_FLAG_FORWARD_ONLY, NULL, &pEnum);
+	////pServices->Release();
+	//
+	//IWbemClassObject *pObject;
+	//ULONG returned;
+	//pEnum->Next(WBEM_INFINITE, 1, &pObject, &returned);
+	//pEnum->Release();
+	//
+	//BSTR temp = SysAllocString(L"CurrentTemperature");
+	//VARIANT v;
+	//VariantInit(&v);
 
-	return (double)pTemperature;
+	//if (!v.vt)
+	//	return 0;
 
+	//pObject->Get(temp, 0, &v, NULL, NULL);
+	//pObject->Release();
+	//SysFreeString(temp);
+	//
+	//pTemperature = V_I4(&v);
+	//VariantClear(&v);
+	//
+	//CoUninitialize();
 
+	//qDebug() << "temperature: " << pTemperature;
+
+	//return (double)pTemperature;
+
+	//// 2nd approach
 	//int pTemperature = -1;
 	////if (pTemperature == NULL)
 	////	return E_INVALIDARG;
@@ -444,5 +449,4 @@ double SystemDiagnostics::getCoreTemperature() {
 	//qDebug() << "temperature: " << pTemperature;
 
 	//return (double)pTemperature;
-
 }

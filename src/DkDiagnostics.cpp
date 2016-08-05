@@ -143,7 +143,6 @@ void Diagnostics::createLayout() {
 	if (DkSettings::showCores) {
 		for (int idx = 0; idx < sysDiag->getNumCpu(); idx++) {
 		
-			// TODO: align percent & label
 			DkPerformanceLabel* cL = new DkPerformanceLabel(tr("Core"));
 			cL->setStyleSheet("QLabel{font-size: " + QString::number(std::max(qRound(DkSettings::fontSize*0.5f), 12)) + "px;}");
 			cpuPercent.push_back(cL);
@@ -193,13 +192,11 @@ void Diagnostics::createLayout() {
 	vpLayout->addWidget(rightBars);
 
 	viewport->setLayout(vpLayout);
-	//viewport->setMinimumWidth(300);
-	//viewport->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 	viewport->adjustSize();
 
 	setCentralWidget(viewport);
-	//setStyleSheet(styles);
 }
+
 void Diagnostics::loadSettings() {
 
 	QSettings settings;
@@ -233,15 +230,12 @@ void Diagnostics::saveSettings() {
 #define Q_OS_WINCE
 void Diagnostics::mouseDoubleClickEvent(QMouseEvent *event) {
 
-	QProcess process;
-	bool starting = process.startDetached("C:\\Windows\\System32\\Taskmgr.exe");
-	
-	QProcess commandLine;
-	commandLine.startDetached("cmd.exe");     //works (but uses wrong working dir).
-	commandLine.write("Taskmgr.exe");
-	
-	qDebug() << starting;
+	// TODO: exit the cmd is not working...
+	QProcess p;
+	bool started = p.startDetached("cmd /c taskmgr.exe & exit");
 
+	if (!started)
+		qDebug() << "could not start task manager";
 }
 
 void Diagnostics::mousePressEvent(QMouseEvent *event) {
@@ -289,13 +283,8 @@ void Diagnostics::keyReleaseEvent(QKeyEvent* event) {
 
 void Diagnostics::changeEvent(QEvent* event) {
 
-
-	qDebug() << "change event: " << event->type(); 
-
 	// forcing show
-	// TODO: window still minimizes on WINDOWS + D
 	QMainWindow::changeEvent(event);	
-
 }
 
 bool Diagnostics::event(QEvent* event) {
@@ -332,12 +321,10 @@ void Diagnostics::showPreferences() {
 	preferences->setStyleSheet("");
 	preferences->show();
 
+	//restart here - it's easier
 	if (preferences->exec()) {
-		//updateStyles();
-		//restart here - it's easier
 		restart();
 	}
-
 }
 
 void Diagnostics::updatePosition(int idx) {

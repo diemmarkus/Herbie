@@ -1,0 +1,17 @@
+# git ignore file
+*.dll
+*.exe
+*.sdf
+*.suo
+*.pdb
+*.filters
+*.htm
+*.aps
+*.zip
+demoCpuTemp.vbs
+build*
+buildfiles/Win32
+buildfiles/x64
+/.project
+/CMakeUser.cmake
+CMakeUser.txt
